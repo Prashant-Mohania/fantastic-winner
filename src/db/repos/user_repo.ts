@@ -4,7 +4,6 @@ import { Request, Response } from "express";
 
 @EntityRepository(UserEntity)
 export class UserRepository extends Repository<UserEntity> {
-
   //Create new User
   async createUser(req: Request, res: Response) {
     const { user_first_name, user_email, user_last_name, user_gender } =
@@ -18,6 +17,23 @@ export class UserRepository extends Repository<UserEntity> {
 
       let userData = await this.save(user);
       return res.send(userData);
+    } catch (error) {
+      res.send(error);
+    }
+  }
+
+  //Update email
+  async upadateEmail(req: Request, res: Response) {
+    const { user_email, user_id } = req.body;
+    try {
+      let data = await this.createQueryBuilder("user")
+        .update(UserEntity)
+        .set({
+          user_email: user_email,
+        })
+        .where("user_id =:user_id", { user_id: user_id })
+        .execute();
+      return res.send(data);
     } catch (error) {
       res.send(error);
     }

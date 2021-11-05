@@ -9,10 +9,13 @@ import {
 } from "firebase/auth";
 import { FirebaseError, initializeApp } from "firebase/app";
 import { firebaseConfig } from "../firebase_config";
+import { getCustomRepository } from "typeorm";
+import { UserRepository } from "../db/repos/user_repo";
 
 const app = initializeApp(firebaseConfig);
 
 export class AuthController {
+
   // Creating the User with Email and Password using Firebase Auth
   static async signUp(req: Request, res: Response) {
     const { user_email, user_password } = req.body;
@@ -115,3 +118,4 @@ export class AuthController {
       });
   }
 }
+

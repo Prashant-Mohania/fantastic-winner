@@ -23,6 +23,12 @@ export class UserEntity extends BaseEntity {
     user_last_name = text;
 
     @Column({
+        nullable: false,
+        type: "varchar",
+    })
+    user_email = text;
+
+    @Column({
         nullable: true,
         type: "varchar",
     })

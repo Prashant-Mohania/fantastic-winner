@@ -10,7 +10,14 @@ export class UserRepository extends Repository<UserEntity>{
             user_id: userId,
             user_first_name: firstName,
             user_last_name: lastName,
+            user_email: email,
             user_gender: ""
+        }).execute();
+    }
+
+    async updateDBEmail(email: String) {
+        await this.createQueryBuilder("users").insert().values({
+            user_email: email,
         }).execute();
     }
 }

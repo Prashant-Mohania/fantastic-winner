@@ -22,18 +22,30 @@ export class UserRepository extends Repository<UserEntity> {
     }
   }
 
-  //Update email
-  async upadateEmail(req: Request, res: Response) {
-    const { user_email, user_id } = req.body;
+  // //Update email
+  // async upadateEmail(req: Request, res: Response) {
+  //   const { user_email, user_id } = req.body;
+  //   try {
+  //     let data = await this.createQueryBuilder("user")
+  //       .update(UserEntity)
+  //       .set({
+  //         user_email: user_email,
+  //       })
+  //       .where("user_id =:user_id", { user_id: user_id })
+  //       .execute();
+  //     return res.send(data);
+  //   } catch (error) {
+  //     res.send(error);
+  //   }
+  // }
+
+  async userDetails(req: Request, res: Response) {
+    const { user_email } = req.body;
     try {
-      let data = await this.createQueryBuilder("user")
-        .update(UserEntity)
-        .set({
-          user_email: user_email,
-        })
-        .where("user_id =:user_id", { user_id: user_id })
-        .execute();
-      return res.send(data);
+      let data = this.createQueryBuilder("user")
+        .where("user_email=:user_email", { user_email: user_email })
+        .getOne();
+      res.send(data);
     } catch (error) {
       res.send(error);
     }

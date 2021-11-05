@@ -1,28 +1,27 @@
-import { text } from "stream/consumers";
 import { BaseEntity, Column, Entity, PrimaryColumn } from "typeorm";
 
 @Entity("user")
 export class UserEntity extends BaseEntity {
   @PrimaryColumn()
-  user_id = text;
+  user_id!: string;
 
   @Column({
     nullable: false,
   })
-  user_first_name = text;
+  user_first_name!: string;
 
   @Column({
     nullable: false,
   })
-  user_last_name = text;
+  user_last_name!: string;
 
   @Column({
     nullable: false,
   })
-  user_email = text;
+  user_email!: string;
 
   @Column({
     nullable: false,
   })
-  user_gender = text;
+  user_gender!: string;
 }

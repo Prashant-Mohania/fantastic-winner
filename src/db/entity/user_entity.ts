@@ -1,23 +1,30 @@
 import { text } from "stream/consumers";
-import { BaseEntity, Column, Entity, PrimaryColumn } from "typeorm";
+import { BaseEntity, Column, Entity, PrimaryColumn} from "typeorm";
 
-@Entity("user")
+@Entity("users")
 export class UserEntity extends BaseEntity {
-    @PrimaryColumn()
+    @Column({
+        primary: true,
+        unique: false,
+        type: "varchar"
+    })
     user_id = text;
 
     @Column({
-        nullable: false
+        nullable: false,
+        type: "varchar",
     })
     user_first_name = text;
 
     @Column({
-        nullable: false
+        nullable: true,
+        type: "varchar",
     })
     user_last_name = text;
 
     @Column({
-        nullable: false
+        nullable: true,
+        type: "varchar",
     })
-    subscribe = text;
+    user_gender = text;
 }

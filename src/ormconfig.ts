@@ -3,6 +3,8 @@ import { ConnectionOptions } from "typeorm";
 
 import dotenv from "dotenv";
 import { UserEntity } from "./db/entity/user_entity";
+import { TankDetailsEntity } from "./db/entity/tank_entity";
+import { WaterSystemEntity } from "./db/entity/water_system_entity";
 
 dotenv.config();
 
@@ -15,7 +17,7 @@ export const connections: ConnectionOptions = {
   database: process.env.Database || "watersupply",
   synchronize: !process.env.DB_NO_SYNC,
   logging: !process.env.DB_NO_LOGS,
-  entities: [UserEntity],
+  entities: [UserEntity, TankDetailsEntity, WaterSystemEntity],
   dropSchema: false,
   migrationsRun: true,
   logger: "debug",

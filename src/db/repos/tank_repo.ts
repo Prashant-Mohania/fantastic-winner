@@ -7,12 +7,11 @@ export class TankRepository extends Repository<TankDetailsEntity> {
   async fetchTankDetails(req: Request, res: Response) {
     const user_id = req.params.user_id;
     try {
-      let data = this.createQueryBuilder("tank_details").where(
-        "user_id=:user_id",
-        {
+      let data = this.createQueryBuilder("tank_details")
+        .where("user_id=:user_id", {
           user_id: user_id,
-        }
-      ).getOne();
+        })
+        .getOne();
       res.send(data);
     } catch (error) {
       res.send(error);

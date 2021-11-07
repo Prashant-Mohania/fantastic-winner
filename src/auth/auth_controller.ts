@@ -9,13 +9,9 @@ import {
 } from "firebase/auth";
 import { FirebaseError, initializeApp } from "firebase/app";
 import { firebaseConfig } from "../firebase_config";
-import { getCustomRepository } from "typeorm";
-import { UserRepository } from "../db/repos/user_repo";
 
 const app = initializeApp(firebaseConfig);
-
 export class AuthController {
-
   // Creating the User with Email and Password using Firebase Auth
   static async signUp(req: Request, res: Response) {
     const { user_email, user_password } = req.body;
@@ -65,7 +61,7 @@ export class AuthController {
   static async updateEmail(req: Request, res: Response) {
     let { user_email } = req.body;
     let auth = getAuth();
-    await updateEmail(auth.currentUser?.getIdToken() ?? JSON.parse("{}"), user_email)
+    await updateEmail(auth.currentUser ?? JSON.parse("{}"), user_email)
       .then(() => {
         res.status(200).json({
           msg: "Success! Email updated",
@@ -83,11 +79,8 @@ export class AuthController {
   // Change the User's Password when User is logged in, using Firebase Auth
   static async changePass(req: Request, res: Response) {
     let { user_password } = req.body;
-
-    await updatePassword(
-      JSON.parse(global.localStorage.getItem("user") || "{}"),
-      user_password
-    )
+    let auth = getAuth();
+    await updatePassword(auth.currentUser ?? JSON.parse("{}"), user_password)
       .then((val) => {
         res.status(200).json({
           msg: "Success! Password changed",
@@ -118,4 +111,3 @@ export class AuthController {
       });
   }
 }
-

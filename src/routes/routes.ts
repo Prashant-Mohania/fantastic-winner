@@ -12,7 +12,7 @@ const router = Router();
 router.get("/", (req, res) => {
   res.send("API is working");
 });
-const userID = getAuth().currentUser?.getIdToken();
+const userID = getAuth().currentUser?.uid ?? "";
 router.post("/signUp", AuthController.signUp);
 router.post("/signIn", AuthController.signIn);
 router.post("/updateEmail", AuthController.updateEmail);

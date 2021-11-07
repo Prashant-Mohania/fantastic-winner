@@ -3,17 +3,24 @@ import { UserEntity } from "../entity/user_entity";
 import { Request, Response } from "express";
 
 @EntityRepository(UserEntity)
-
 export class UserRepository extends Repository<UserEntity> {
   //Create new User
-  async createUser(email: String, firstName: String, lastName: String, userId: String) {
-        await this.createQueryBuilder("users").insert().values({
-            user_id: userId,
-            user_first_name: firstName,
-            user_last_name: lastName,
-            user_gender: ""
-        }).execute();
-    }
+  async createUser(
+    gender: String,
+    firstName: String,
+    lastName: String,
+    userId: String
+  ) {
+    await this.createQueryBuilder("users")
+      .insert()
+      .values({
+        user_id: userId,
+        user_first_name: firstName,
+        user_last_name: lastName,
+        user_gender: gender,
+      })
+      .execute();
+  }
 
   // //Update email
   // async upadateEmail(req: Request, res: Response) {
@@ -35,7 +42,7 @@ export class UserRepository extends Repository<UserEntity> {
   async userDetails(req: Request, res: Response) {
     const { user_email } = req.body;
     try {
-      let data = this.createQueryBuilder("user")
+      let data = this.createQueryBuilder("users")
         .where("user_email=:user_email", { user_email: user_email })
         .getOne();
       res.send(data);
@@ -44,4 +51,3 @@ export class UserRepository extends Repository<UserEntity> {
     }
   }
 }
-

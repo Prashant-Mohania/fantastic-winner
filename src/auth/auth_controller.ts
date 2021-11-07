@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -8,10 +9,12 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth";
 import { FirebaseError, initializeApp } from "firebase/app";
+
 import { firebaseConfig } from "../firebase_config";
 
 const app = initializeApp(firebaseConfig);
 export class AuthController {
+
   // Creating the User with Email and Password using Firebase Auth
   static async signUp(req: Request, res: Response) {
     const { user_email, user_password } = req.body;
@@ -39,6 +42,7 @@ export class AuthController {
     let { user_email, user_password } = req.body;
     console.log(req.body);
     let auth = getAuth();
+
 
     await signInWithEmailAndPassword(auth, user_email, user_password)
       .then((val) => {
@@ -111,3 +115,4 @@ export class AuthController {
       });
   }
 }
+

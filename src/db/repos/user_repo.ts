@@ -3,6 +3,7 @@ import { UserEntity } from "../entity/user_entity";
 import { Request, Response } from "express";
 
 @EntityRepository(UserEntity)
+
 export class UserRepository extends Repository<UserEntity> {
   //Create new User
   async createUser(
@@ -51,3 +52,4 @@ export class UserRepository extends Repository<UserEntity> {
     }
   }
 }
+

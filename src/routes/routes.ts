@@ -9,6 +9,8 @@ import { WaterSystemController } from "../db/controller/water_system_controller"
 
 const router = Router();
 
+
+
 router.get("/", (req, res) => {
   res.send("API is working");
 });
@@ -16,8 +18,8 @@ const userID = getAuth().currentUser?.uid ?? "";
 router.post("/signUp", AuthController.signUp);
 router.post("/signIn", AuthController.signIn);
 router.post("/updateEmail", AuthController.updateEmail);
-router.post("/forgotPass", AuthController.forgotPass);
-router.post("/changePass", AuthController.changePass);
+router.post("/forgotPassword", AuthController.forgotPass);
+router.post("/updatePassword", AuthController.changePass);
 router.get(`/${userID}/`, UserController.userDetails);
 router.get(`/${userID}/swm`, TankController.fetchTankDetails);
 router.get(
@@ -25,4 +27,6 @@ router.get(
   WaterSystemController.fetchWaterSystemDetails
 );
 
+
 export { router };
+

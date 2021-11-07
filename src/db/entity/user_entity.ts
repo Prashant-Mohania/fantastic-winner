@@ -28,3 +28,4 @@ export class UserEntity extends BaseEntity {
   })
   user_gender = text;
 }
+
